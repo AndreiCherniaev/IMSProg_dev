@@ -17,6 +17,10 @@ on:
       - "**/index.html"
   workflow_dispatch:
 
+# Set the environment variable globally for the workflow
+env:
+  CMAKE_BUILD_PARALLEL_LEVEL: 4
+
 jobs:
   amd64:
     runs-on: ubuntu-latest
