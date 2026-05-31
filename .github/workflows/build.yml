@@ -71,7 +71,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
     steps:
       - name: Install packages required
-        shell: bash
+        shell: sh
         run: |
           apt-get update -qq
           apt-get install -yq \
@@ -84,12 +84,13 @@ jobs:
             pkg-config
           apt-get satisfy "systemd-dev (>= 253-2~) | udev (<< 253-2~)" --yes
       - uses: actions/checkout@v6
-      - name: Build
-        working-directory: .
-        run: |
-          cmake -S . -B build/
-          cmake --build build/ --parallel
-          cmake --install build/
+        # Step 2: Ensure the script is executable (required for Linux runners)
+      - name: Make Script Executable
+        run: chmod +x ./build_all.sh
+        # Step 3: Run the build script
+      - name: Execute Build Script
+        # working-directory: .
+        run: sudo ./build_all.sh
 
 # ... (your existing amd64 job remains unchanged)
 
