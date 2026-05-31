@@ -37,7 +37,6 @@ jobs:
             deps: cmake g++ libusb-1.0-0-dev qtbase5-dev qttools5-dev pkgconf udev
           - name: Debian-11
             # Uses gcc 10.2.1, clang 11.0.1, cmake 3.18.4
-            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
             image: "debian:bullseye"
             deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-11
