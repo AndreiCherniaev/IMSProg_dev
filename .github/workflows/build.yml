@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [Ubuntu-24, Ubuntu-22, Debian-11, Debian-12, Debian-Testing, Debian-Experimental]
+        name: [Ubuntu-24, Ubuntu-22, Debian-13, Debian-12, Debian-Testing, Debian-Experimental]
         cpp_compiler: [g++]
         include:
           - name: Ubuntu-24
@@ -35,12 +35,11 @@ jobs:
             image: "ubuntu:22.04"
             ubuntu: 22
             deps: cmake g++ libusb-1.0-0-dev qtbase5-dev qttools5-dev pkgconf udev
-          - name: Debian-11
-            # Uses gcc 10.2.1, clang 11.0.1, cmake 3.18.4
-            image: "debian:bullseye"
+          - name: Debian-13
+            image: "debian:trixie"
             deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
-          - name: Debian-11
-            image: "debian:bullseye"
+          - name: Debian-13
+            image: "debian:trixie"
             c_compiler: clang
             cpp_compiler: clang++
             deps: cmake clang libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
