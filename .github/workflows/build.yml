@@ -23,42 +23,51 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [Ubuntu-24, Ubuntu-22, Debian-11, Debian-12, Debian-Testing, Debian-Experimental]
+        name: [Ubuntu-24, Ubuntu-22, Debian-13, Debian-12, Debian-Testing, Debian-Experimental]
         cpp_compiler: [g++]
         include:
           - name: Ubuntu-24
             image: "ubuntu:24.04"
             ubuntu: 24
+            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Ubuntu-22
             # Uses gcc 12.2.0, clang 15.0.7, cmake 3.24.2
             image: "ubuntu:22.04"
             ubuntu: 22
-          - name: Debian-11
-            # Uses gcc 10.2.1, clang 11.0.1, cmake 3.18.4
+            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
+          - name: Debian-13
             image: "debian:bullseye"
+            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-11
             image: "debian:bullseye"
             c_compiler: clang
             cpp_compiler: clang++
+            deps: cmake clang libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-12
             # Uses gcc 12.2.0, clang 15.0.6, cmake 3.25.1
             image: "debian:bookworm"
+            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-12
             image: "debian:bookworm"
             c_compiler: clang
             cpp_compiler: clang++
+            deps: cmake clang libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-Testing
             image: "debian:testing"
+            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-Testing
             image: "debian:testing"
             c_compiler: clang
             cpp_compiler: clang++
+            deps: cmake clang libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-Experimental
             image: "debian:experimental"
+            deps: cmake g++ libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
           - name: Debian-Experimental
             image: "debian:experimental"
             c_compiler: clang
             cpp_compiler: clang++
+            deps: cmake clang libusb-1.0-0-dev pkgconf qt6-base-dev qt6-tools-dev linguist-qt6 qt6-l10n-tools qt6-base-dev-tools qt6-tools-dev-tools systemd-dev
     container:
       image: ${{ matrix.image }}
       env:
@@ -70,19 +79,6 @@ jobs:
         APT_LISTCHANGES_FRONTEND: none
         DEBIAN_FRONTEND: noninteractive
     steps:
-      - name: Install packages required
-        shell: bash
-        run: |
-          apt-get update -qq
-          apt-get install -yq \
-            clang \
-            cmake \
-            g++ \
-            libusb-1.0-0-dev \
-            qtbase5-dev \
-            qttools5-dev \
-            pkg-config
-          apt-get satisfy "systemd-dev (>= 253-2~) | udev (<< 253-2~)" --yes
       - uses: actions/checkout@v6
       - name: Build
         working-directory: .
