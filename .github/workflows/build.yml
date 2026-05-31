@@ -90,7 +90,7 @@ jobs:
         # Step 3: Run the build script
       - name: Execute Build Script
         # working-directory: .
-        run: sudo ./build_all.sh
+        run: ./build_all.sh
 
 # ... (your existing amd64 job remains unchanged)
 
