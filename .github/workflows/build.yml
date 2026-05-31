@@ -1,4 +1,4 @@
-name: Build
+name: DebianUbuntu build
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
       - "README.md"
       - "**/README.md"
       - "**/index.html"
+      - "rpm/imsprog.spec"
   pull_request:
     branches-ignore:
       - "debian/**"
@@ -15,6 +16,7 @@ on:
       - "README.md"
       - "**/README.md"
       - "**/index.html"
+      - "rpm/imsprog.spec"
   workflow_dispatch:
 
 env:
@@ -97,6 +99,29 @@ jobs:
 
 # ... (your existing amd64 job remains unchanged)
 
+name: Fedora Spec Build
+
+on:
+  push:
+    branches-ignore:
+      - "debian/**"
+    paths-ignore:
+      - "README.md"
+      - "**/README.md"
+      - "**/index.html"
+  pull_request:
+    branches-ignore:
+      - "debian/**"
+    paths-ignore:
+      - "README.md"
+      - "**/README.md"
+      - "**/index.html"
+  workflow_dispatch:
+  
+env:
+  CMAKE_INSTALL_PARALLEL_LEVEL: 4
+
+jobs:   
   fedora-rpm:
     runs-on: ubuntu-latest
     container:
