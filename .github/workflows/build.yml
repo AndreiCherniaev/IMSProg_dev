@@ -84,13 +84,12 @@ jobs:
             pkg-config
           apt-get satisfy "systemd-dev (>= 253-2~) | udev (<< 253-2~)" --yes
       - uses: actions/checkout@v6
-        # Step 2: Ensure the script is executable (required for Linux runners)
-      - name: Make Script Executable
-        run: chmod +x ./build_all.sh
-        # Step 3: Run the build script
-      - name: Execute Build Script
-        # working-directory: .
-        run: ./build_all.sh
+      - name: Build
+        working-directory: .
+        run: |
+          cmake -S . -B build/
+          cmake --build build/ --parallel
+          cmake --install build/ --parallel 4
 
 # ... (your existing amd64 job remains unchanged)
 
