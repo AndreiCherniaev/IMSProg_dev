@@ -89,7 +89,7 @@ jobs:
         run: |
           cmake -S . -B build/
           cmake --build build/ --parallel
-          cmake --install build/ --parallel 4
+          cmake --install build/
 
 # ... (your existing amd64 job remains unchanged)
 

@@ -11,7 +11,7 @@ rm -rf build/
 mkdir build/
 cmake -S . -B build/
 cmake --build build/ --parallel
-cmake --install build/ --parallel 4
+cmake --install build/
 rm -rf build/
 )
 (
@@ -20,7 +20,7 @@ rm -rf build/
 mkdir build/
 cmake -S . -B build/
 cmake --build build/ --parallel
-cmake --install build/ --parallel 4
+cmake --install build/
 rm -rf build/
 )
 (
@@ -29,7 +29,7 @@ rm -rf build/
 mkdir build/
 cmake -S . -B build/
 cmake --build build/ --parallel
-cmake --install build/ --parallel 4
+cmake --install build/
 rm -rf build/
 )
 # Reloading the USB rules or creating the app bundles for macOS
