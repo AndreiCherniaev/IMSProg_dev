@@ -161,15 +161,15 @@ popd
 
 %install
 pushd IMSProg_editor
-%cmake_install --parallel %{_smp_ncpus_max}
+%cmake_install
 popd
 
 pushd IMSProg_programmer
-%cmake_install --parallel %{_smp_ncpus_max}
+%cmake_install
 popd
 
 pushd IMSProg_database_update
-%cmake_install --parallel %{_smp_ncpus_max}
+%cmake_install
 popd
 
 # rename README
