@@ -1,4 +1,4 @@
-name: DebianUbuntu build
+name: Build
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
       - "README.md"
       - "**/README.md"
       - "**/index.html"
-      - "rpm/imsprog.spec"
   pull_request:
     branches-ignore:
       - "debian/**"
@@ -16,7 +15,6 @@ on:
       - "README.md"
       - "**/README.md"
       - "**/index.html"
-      - "rpm/imsprog.spec"
   workflow_dispatch:
 
 env:
@@ -84,7 +82,8 @@ jobs:
         APT_LISTCHANGES_FRONTEND: none
         DEBIAN_FRONTEND: noninteractive
     steps:
-      - name: Install dependencies
+      - name: Install packages required
+        shell: bash
         run: |
           echo "Installing dependencies for ${{ matrix.item }}"
           apt-get update -qq
@@ -99,29 +98,6 @@ jobs:
 
 # ... (your existing amd64 job remains unchanged)
 
-name: Fedora Spec Build
-
-on:
-  push:
-    branches-ignore:
-      - "debian/**"
-    paths-ignore:
-      - "README.md"
-      - "**/README.md"
-      - "**/index.html"
-  pull_request:
-    branches-ignore:
-      - "debian/**"
-    paths-ignore:
-      - "README.md"
-      - "**/README.md"
-      - "**/index.html"
-  workflow_dispatch:
-  
-env:
-  CMAKE_INSTALL_PARALLEL_LEVEL: 4
-
-jobs:   
   fedora-rpm:
     runs-on: ubuntu-latest
     container:
@@ -162,5 +138,5 @@ jobs:
       - name: Upload RPM Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: fedora-43-rpm
+          name: fedora-44-rpm
           path: ~/rpmbuild/RPMS/*/*.rpm
